@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Nekmit | Pages | Team</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+    <style>
+        .team-member {
+            position: relative;
+            width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .team-member .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #ff5722;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .team-member .card-content {
+            padding: 15px;
+            font-family: Arial, sans-serif;
+            justify-content: left;
+            align-items: left;
+        }
+
+        .team-member .card-content h3 {
+            font-size: 20px;
+            margin: 10px 0 5px;
+            color: #333;
+        }
+
+        .team-member .card-content p {
+            font-size: 14px;
+            color: #555;
+            margin: 0;
+            line-height: 1.6;
+            text-align: left; 
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px); /* Enhanced hover effect */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Adds a stronger shadow on hover */
+        }
+
+        @media (max-width: 768px) {
+            .team-member {
+                width: 100%;
+                margin-bottom: 20px; /* Makes cards stack vertically on smaller screens */
+            }
+        }
+
+        /* Additional styling for the headings */
+        h1, h2 {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+    </style>
+</head>
+<body id="top">
+    <div class="bgded overlay padtop" style="background-image:url('../images/demo/backgrounds/01.png');">
+        <header id="header" class="hoc clear">
+            <div id="logo" class="fl_left"> 
+                <h1><a href="../index.html">Nekmit</a></h1>
+            </div>
+            <nav id="mainav" class="fl_right">
+                <ul class="clear">
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="active"><a class="drop" href="#">Pages</a>
+                        <ul>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li><a href="full-width.html">Full Width</a></li>
+                            <li><a href="sidebar-left.html">Sidebar Left</a></li>
+                            <li><a href="sidebar-right.html">Sidebar Right</a></li>
+                            <li><a href="basic-grid.html">Basic Grid</a></li>
+                            <li><a href="font-icons.html">Font Icons</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Link Text</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div id="breadcrumb" class="hoc clear"> 
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Team</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Team Section -->
+    <div class="wrapper row3">
+        <main class="hoc container clear">
+            <div class="content">
+                <div id="team">
+                    <header class="heading"><h1>Teams</h1></header>
+
+                    <!-- Sub-team 1: Volcanic Emissions -->
+                    <section>
+                        <h2>Volcanic Emissions</h2>
+                        <ul class="nospace clear">
+                            <li class="one_quarter first">
+                                <div class="team-member">
+                                    <img src="../images/teams/Mudakikwa_R._Eric.jpg" alt="Mr. Eric Mudakikwa">
+                                    <h4>Mr. Eric Mudakikwa</h4>
+                                    <p><strong>Role:</strong> Air Quality Measurements - Co-PI</p>
+                                    <p><strong>Address:</strong> Kigali, Rwanda</p>
+                                    <p><strong>Email:</strong> eric.mudakikwa@email.com</p>
+                                    <p><strong>Website:</strong> <a href="https://www.ericmudakikwa.com" target="_blank">ericmudakikwa.com</a></p>
+                                </div>
+                            </li>
+                            <!-- Add more team members here -->
+                        </ul>
+                    </section>
+
+                    <!-- Sub-team 2: Soil Evolution and Podoconiosis -->
+                    <section>
+                        <h2>Soil Evolution and Podoconiosis</h2>
+                        <ul class="nospace clear">
+                            <li class="one_quarter">
+                                <div class="team-member">
+                                    <img src="../images/teams/Bastien.PNG" alt="Dr. Bastien Wild">
+                                    <h4>Dr. Bastien Wild</h4>
+                                    <p><strong>Role:</strong> Soil Evolution - Co-PI</p>
+                                    <p><strong>Address:</strong> Paris, France</p>
+                                    <p><strong>Email:</strong> bastien.wild@email.com</p>
+                                    <p><strong>Website:</strong> <a href="https://www.bastienwild.com" target="_blank">bastienwild.com</a></p>
+                                </div>
+                            </li>
+                            <!-- Add more team members here -->
+                        </ul>
+                    </section>
+
+                    <!-- Sub-team 3: Landslides -->
+                    <section>
+                        <h2>Landslides</h2>
+                        <ul class="nospace clear">
+                            <li class="one_quarter">
+                                <div class="team-member">
+                                    <img src="../images/teams/Alberto.PNG" alt="Prof. Alberto Armigliato">
+                                    <h4>Prof. Alberto Armigliato</h4>
+                                    <p><strong>Role:</strong> Modelling - Co-PI</p>
+                                    <p><strong>Address:</strong> Rome, Italy</p>
+                                    <p><strong>Email:</strong> alberto.armigliato@email.com</p>
+                                    <p><strong>Website:</strong> <a href="https://www.albertoarmigliato.com" target="_blank">albertoarmigliato.com</a></p>
+                                </div>
+                            </li>
+                            <!-- Add more team members here -->
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
