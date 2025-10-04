@@ -33,10 +33,10 @@
     <a class="navbar-brand" href="#">Guest System</a>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav ms-auto">
-    <li class="nav-item"><a class="nav-link" href="/event_mgt/events/index.php">Events</a></li>
+    <li class="nav-item"><a class="nav-link" href="../events/index.php">Events</a></li>
 
           <?php if(isset($_SESSION['admin_id'])): ?>
-              <li class="nav-item"><a class="nav-link" href="/event_mgt/users/index.php">Users</a></li>
+              <li class="nav-item"><a class="nav-link" href="../users/index.php">Users</a></li>
               
               <!-- Attendence Dropdown -->
               <li class="nav-item dropdown">
@@ -44,15 +44,15 @@
                       Attendence
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="attendanceDropdown">
-                      <li><a class="dropdown-item" href="/event_mgt/attendence/checkin.php">Manual Check-In</a></li>
-                      <li><a class="dropdown-item" href="/event_mgt/attendence/attendence_scan.php">Scan QR</a></li>
+                      <li><a class="dropdown-item" href="../attendence/checkin.php">Manual Check-In</a></li>
+                      <li><a class="dropdown-item" href="../attendence/attendence_scan.php">Scan QR</a></li>
                   </ul>
               </li>
 
-              <li class="nav-item"><a class="nav-link" href="/event_mgt/admin/dashboard.php">Dashboard</a></li>
-              <li class="nav-item"><a class="nav-link" href="/event_mgt/admin/logout.php">Logout</a></li>
+              <li class="nav-item"><a class="nav-link" href="../admin/dashboard.php">Dashboard</a></li>
+              <li class="nav-item"><a class="nav-link" href="../admin/logout.php">Logout</a></li>
           <?php else: ?>
-              <li class="nav-item"><a class="nav-link" href="/event_mgt/admin/login.php">Login</a></li>
+              <li class="nav-item"><a class="nav-link" href="../admin/login.php">Login</a></li>
           <?php endif; ?>
       </ul>
 

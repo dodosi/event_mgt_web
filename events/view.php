@@ -65,13 +65,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Generate QR code
         $qrData = "Name: $first_name $middle_name $last_name\nEmail: $email\nVisitor Type: $visitor_type\nTicket: $ticket_code\nEvent: {$event['event_name']}";
+       // ✅ Generate QR code and save it as a temporary file
         $qr = Builder::create()
             ->writer(new PngWriter())
             ->data($qrData)
             ->encoding(new Encoding('UTF-8'))
-            ->size(120)
-            ->margin(5)
+            ->size(300) // bigger for email
+            ->margin(10)
             ->build();
+
+        $qrPath = __DIR__ . "/temp_qr_" . uniqid() . ".png";
+        $qr->saveToFile($qrPath);
+
 
         $qr_base64 = base64_encode($qr->getString());
 
@@ -79,35 +84,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail = new PHPMailer(true);
         try {
             $mail->isSMTP();
-            $mail->Host       = 'smtp.example.com'; // your SMTP
+            $mail->Host       = 'smtp.hostinger.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'you@example.com';
-            $mail->Password   = 'password';
+            $mail->Username   = 'events@ukudox.com';
+            $mail->Password   = 'Ukudox@2025';
             $mail->SMTPSecure = 'tls';
             $mail->Port       = 587;
+            $mail->CharSet    = 'UTF-8';
 
-            $mail->setFrom('noreply@example.com', 'Event Organizer');
+            $mail->setFrom('events@ukudox.com', 'Event Registration');
             $mail->addAddress($email, "$first_name $last_name");
 
+            // ✅ Embed QR code as inline image
+            $mail->addEmbeddedImage($qrPath, 'ticket_qr');
+
             $mail->isHTML(true);
-            $mail->Subject = "Your Ticket for {$event['event_name']}";
-            $mail->Body    = "
-                <h2>✅ You are registered!</h2>
-                <p>Event: {$event['event_name']}<br>
-                Location: {$event['location']}<br>
-                Date: ".date("d M Y H:i", strtotime($event['event_date']))."<br>
-                Ticket: <strong>$ticket_code</strong></p>
-                <p><strong>QR Code:</strong></p>
-                <img src='data:".$qr->getMimeType().";base64,$qr_base64'>
+            $mail->Subject = "🎟️ Your Ticket for {$event['event_name']}";
+           $mail->Body = "
+                <div style='font-family: Arial, sans-serif; padding: 20px;'>
+                    <h2>✅ You are registered!</h2>
+                    <p><strong>Event:</strong> {$event['event_name']}</p>
+                    <p><strong>Location:</strong> {$event['location']}</p>
+                    <p><strong>Date:</strong> " . date("d M Y H:i", strtotime($event['event_date'])) . "</p>
+                    <p><strong>Ticket:</strong> <span style='color: #007bff;'>$ticket_code</span></p>
+                    <hr>
+                    <p>📲 <strong>Your QR Code:</strong></p>
+                    <img src='cid:ticket_qr' alt='QR Code' style='width:200px;'>
+                    <br><br>
+
+                    <!-- ✅ View Event Details -->
+                    <a href='https://events.ukudox.com/events/view.php?id=$event_id' 
+                    style='display:inline-block;padding:10px 20px;background:#28a745;color:white;text-decoration:none;border-radius:5px;margin-right:10px;'>
+                    🔗 View Event Details
+                    </a>
+
+                    <!-- ✅ View QR Online -->
+                    <a href='https://events.ukudox.com/events/view_qr.php?visitor_id=$visitor_id' 
+                    style='display:inline-block;padding:10px 20px;background:#007bff;color:white;text-decoration:none;border-radius:5px;'>
+                    📱 View Your QR Online
+                    </a>
+                </div>
             ";
+
 
             $mail->send();
             $message = "<div class='alert alert-success mt-3'>✅ Registered! Ticket sent to your email.</div>";
+
+            // ✅ Clean up temp file
+            unlink($qrPath);
+
         } catch (Exception $e) {
-           $message = "<div class='alert alert-success mt-3'>✅ Registered! Ticket sent to your email.</div>";
-   
-           // $message = "<div class='alert alert-warning mt-3'>⚠️ Registered but email could not be sent. Mailer Error: {$mail->ErrorInfo}</div>";
+            $message = "<div class='alert alert-warning mt-3'>⚠️ Registered but email could not be sent. Error: {$mail->ErrorInfo}</div>";
         }
+
     } else {
         $message = "<div class='alert alert-info mt-3'>ℹ️ Already registered for this event.</div>";
     }
