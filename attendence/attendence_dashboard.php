@@ -1,9 +1,10 @@
 <?php
+session_start();
 include '../db.php';
 include '../header.php';
 
 $attendance = $conn->query("
-    SELECT a.*, v.first_name, v.last_name, v.visitor_type, e.event_name
+    SELECT a.*, v.first_name, v.last_name,v.email, v.visitor_type, e.event_name
     FROM attendance a
     JOIN visitors v ON a.visitor_id=v.visitor_id
     JOIN events e ON a.event_id=e.event_id

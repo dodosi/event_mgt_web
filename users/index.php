@@ -1,8 +1,11 @@
+<?php
+session_start();
+?>
 <?php include '../db.php'; ?>
 <?php include '../header.php'; ?>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-  <h3>Users Management</h3>
+  <h3>Users</h3>
   <a href="create.php" class="btn btn-primary">+ Add New User</a>
 </div>
 
