@@ -1,7 +1,5 @@
 <?php
 session_start();
-?>
-<?php
 include '../db.php';
 include '../header.php';
 ?>
@@ -12,14 +10,13 @@ include '../header.php';
         <?php if(isset($_SESSION['admin_id'])): ?>
             <a href="create.php" class="btn btn-primary">+ Add New Event</a>
         <?php endif; ?>
-</div>
-
     </div>
 
     <div class="row g-4">
         <?php
         $sql = "SELECT * FROM events ORDER BY event_date DESC";
         $result = $conn->query($sql);
+
         if ($result && $result->num_rows > 0):
             while ($row = $result->fetch_assoc()):
         ?>
@@ -35,15 +32,16 @@ include '../header.php';
                         <?= $row['status'] ?>
                         </span>
                     </p>
+
                     <div class="d-flex justify-content-between">
                         <a href="view.php?id=<?= $row['event_id'] ?>" class="btn btn-sm btn-info">👁 View</a>
-                        
+
                         <?php if(isset($_SESSION['admin_id'])): ?>
                             <a href="edit.php?id=<?= $row['event_id'] ?>" class="btn btn-sm btn-warning">✏️ Edit</a>
-                            <a href="delete.php?id=<?= $row['event_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">🗑 Delete</a>
+                            <a href="delete.php?id=<?= $row['event_id'] ?>" class="btn btn-sm btn-danger"
+                               onclick="return confirm('Are you sure you want to delete this event?')">🗑 Delete</a>
                         <?php endif; ?>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -52,7 +50,10 @@ include '../header.php';
         else:
         ?>
         <div class="col-12 text-center text-muted">
-            No events found. Click "Add New Event" to create one.
+            No events found.
+            <?php if(isset($_SESSION['admin_id'])): ?>
+                Click "Add New Event" to create one.
+            <?php endif; ?>
         </div>
         <?php endif; ?>
     </div>

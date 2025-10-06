@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $user = "root";
-$pass = "";
+$pass = "sethkevin";
 $db   = "event_mgt";
 
 $conn = new mysqli($host, $user, $pass, $db);

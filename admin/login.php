@@ -1,11 +1,12 @@
 <?php
 session_start();
 include '../db.php';
+include '../header.php';
 
 $message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username =addslashes( $_POST['username']);
-    $password = addslashes( $_POST['password']);
+    $username = addslashes($_POST['username']);
+    $password = addslashes($_POST['password']);
 
     $stmt = $conn->prepare("SELECT * FROM admins WHERE username=?");
     $stmt->bind_param("s", $username);
@@ -35,33 +36,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <title>Admin Login</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
-<div class="container">
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-5">
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Admin Login</h4>
-                </div>
-                <div class="card-body">
-                    <?php if($message): ?>
-                        <div class="alert alert-danger"><?= $message ?></div>
-                    <?php endif; ?>
-                    <form method="POST">
-                        <div class="mb-3">
-                            <label>Username</label>
-                            <input type="text" name="username" class="form-control" required>
+<body class="bg-light d-flex flex-column min-vh-100">
+
+    <!-- Navbar (from header.php will appear here) -->
+
+    <!-- Centered Login Form -->
+    <div class="flex-grow-1 d-flex justify-content-center align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <div class="card shadow">
+                        <div class="card-header bg-primary text-white text-center">
+                            <h4 class="mb-0">Admin Login</h4>
                         </div>
-                        <div class="mb-3">
-                            <label>Password</label>
-                            <input type="password" name="password" class="form-control" required>
+                        <div class="card-body">
+                            <?php if($message): ?>
+                                <div class="alert alert-danger"><?= $message ?></div>
+                            <?php endif; ?>
+                            <form method="POST">
+                                <div class="mb-3">
+                                    <label>Username</label>
+                                    <input type="text" name="username" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Password</label>
+                                    <input type="password" name="password" class="form-control" required>
+                                </div>
+                                <button class="btn btn-primary w-100">Login</button>
+                            </form>
                         </div>
-                        <button class="btn btn-primary w-100">Login</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 </body>
 </html>
